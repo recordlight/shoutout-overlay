@@ -1,0 +1,32 @@
+
+<html>
+
+<head>
+<link rel="stylesheet" href="style.css">
+<title>Chat Widget</title>
+<meta charset="utf-8" />
+<link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+    <div id='dialog-box' class='dialog fadeOutRight fadeInRight absolutebottom'>
+        <div id='inner-dialog-box' class='inner-dialog'>
+            <div id='video-frame' class='video-frame'>
+            </div>
+            <div class="text-area" class="text-area">
+                <img id="profile-image" src="">
+                <p>Check out</p>
+                <p id="streamer-name">{Streamer}</p>
+                <p>Last Category: <span id="streamer-category">{Game Category}</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="./scripts/authentication.js"></script>
+    <script src="./scripts/tmi.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
