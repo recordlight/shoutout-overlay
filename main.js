@@ -4,7 +4,7 @@ const urlParams = new URLSearchParams(queryString);
 const shoutoutQueue = [];
 
 const timer = 10000;
-const popupdelaytimer = 14000;
+const popupdelaytimer = 10000;
 
 
 
@@ -23,9 +23,6 @@ const mainfunction = async function(){
     options: { debug: true },
       channels: [mainChannel]
     };
-    
-  token = getToken().access_token;
-  console.log(token);
 
   const client = new tmi.Client( opts );
   client.connect().catch(console.error);
@@ -39,7 +36,7 @@ const mainfunction = async function(){
       let username = extractUsername(message);
       
       if(shoutoutQueue.length === 0){
-        getUsernameInfo(username).then((response)=>console.log(response))
+        getUsernameInfo(username);
         shoutoutQueue.push(username);
       } else {
         shoutoutQueue.push(username);
@@ -77,39 +74,35 @@ const mainfunction = async function(){
     console.log('getting username info: ' +userId);
 
     Promise.all([
-      token = getToken().then((token) => {
-          result = fetch("https://api.twitch.tv/helix/users?login="+userId, {
-            method: "GET",
-            headers:{
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer '+ token.access_token,
-              'Client-Id': clientId
-            }
-          })
-        .then(response => response.json())
-        .then(response => {
-          if(response.data.length > 0){
-            streamerName.innerHTML = response.data[0].display_name;
-            profileImage.setAttribute("src", response.data[0].profile_image_url);
-            fetch("https://api.twitch.tv/helix/channels?broadcaster_id="+response.data[0].id, {
-              method: "GET",
-              headers:{
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+ token.access_token,
-                'Client-Id': clientId
-              }
-            }).then(response => response.json())
-            .then(response => {
-                streamerCategory.innerHTML = response.data[0].game_name;
-                setTimeout(resetBox, timer);
-              }
-            );
-          } else {
-            setTimeout(resetBox, 0);
-          }
-        })
+      result = fetch("https://twitchapi.teklynk.com/getuserstatus.php?channel="+userId, {
+        method: "GET",
+        headers:{
+      }
       })
-      
+      .then(response => response.json())
+      .then(response => {
+        if(response.data.length > 0){
+          streamerName.innerHTML = response.data[0].broadcaster_name;
+          streamerCategory.innerHTML = response.data[0].game_name;
+          //profileImage.setAttribute("src", response.data[0].profile_image_url);
+        } else {
+          setTimeout(resetBox, 0);
+        }
+      })
+      ,
+      result = fetch("https://twitchapi.teklynk.com/getuserinfo.php?channel="+userId, {
+        method: "GET",
+        headers:{
+      }
+      })
+      .then(response => response.json())
+      .then(response => {
+        if(response.data.length > 0){
+          profileImage.setAttribute("src", response.data[0].profile_image_url);
+        } else {
+          setTimeout(resetBox, 0);
+        }
+      })
       ,
       fetch("https://twitchapi.teklynk.com/getuserclips.php?channel="+userId+"&limit=100", {
         method: "GET",
@@ -135,13 +128,16 @@ const mainfunction = async function(){
         }
       )
     ]).then(()=>{
+      
+      console.log(shoutoutQueue);
       setTimeout(
         resetAnimation(),popupdelaytimer
       );
+      setTimeout(resetBox, timer);
     })
 
 
-    return token;
+    return null;
     
   }
 }
