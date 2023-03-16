@@ -38,3 +38,8 @@ The dashed dot color can be changed by adding this to the custom css part as wel
 
 
 <img src="./documentation/image/customization.png" width="400">
+
+# Additional note
+I would appreciate if you could credit me as recordlight (or twitch.tv/recordlight or twitter.com/recordlight_) when using the widget.
+
+# Thank you
