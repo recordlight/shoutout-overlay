@@ -61,16 +61,11 @@ body{
 
 p { margin:0 }
 
-.text-area p {
-    color: #ffffff;
-    font-size: 18px;
-}
-
 #streamer-name{
     font-size: 24px;
 }
 
-.text-area img {
+.content-area img {
     float: left;
     margin-right: 20px;
     width: 80px;
@@ -78,10 +73,15 @@ p { margin:0 }
     border-radius: 50%;
 }
 
-.text-area{
+.content-area{
     position: relative;
     top: 30px;
     left: 15px;
+}
+
+.text-area{
+    color: #ffffff;
+    font-size: 18px;
 }
 
 @keyframes fadeIn {

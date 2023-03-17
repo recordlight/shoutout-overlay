@@ -65,8 +65,27 @@ const mainfunction = async function(){
     profileImage.setAttribute("src","");
     shoutoutQueue.shift();
     if(shoutoutQueue.length > 0){
-      getUsernameInfo(shoutoutQueue[0]).then((response)=>console.log(response));
+      getUsernameInfo(shoutoutQueue[0]);
     }}, 2000);
+  }
+
+  function pickVideoAlgorithm(videoObject){
+    if(videoObject.length > 0){
+      videoObject.sort(function(a,b){return new Date(b.created_at) - new Date(a.created_at)});
+
+      const probabilityArray = [0,0,0,0,0,1,1,1,1,2,2,2,3,3,3,4,4,5,5,6,7];
+      var random = Math.floor(Math.random() * (probabilityArray.length));
+      var pickedIndex = probabilityArray[random];
+
+      pickedIndex = pickedIndex % (videoObject.length);
+
+
+      console.log(random);
+      console.log(pickedIndex);
+
+      return videoObject[pickedIndex];
+
+    }
   }
 
   function getUsernameInfo(userId){
@@ -110,14 +129,10 @@ const mainfunction = async function(){
         }
       }).then(response => response.json())
       .then(response => {
-          console.log(response.data);
           if(response.data.length > 0){
-            const random = Math.floor(Math.random() * response.data.length);
-            chosenClip = response.data[random];
+            chosenClip = pickVideoAlgorithm(response.data);
 
             console.log(chosenClip);
-
-            console.log(videoFrame);
             videoFrame.innerHTML = `
                 <video id="video-content" autoplay muted loop>
                   <source src="${chosenClip.clip_url}" type="video/mp4" />
@@ -137,7 +152,7 @@ const mainfunction = async function(){
     })
 
 
-    return null;
+    return true;
     
   }
 }
