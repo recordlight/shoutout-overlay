@@ -67,5 +67,6 @@ I would appreciate if you could put recordlight as credit (or twitch.tv/recordli
 | ------------- | ------------- |
 | 3/17/2023  | Code optimization, improved clip picking algorithm, enable easier change of text style  |
 | 3/18/2023  | Bug fix just to enable only mods and broadcaster to trigger the so. Also added the !shoutout command. Also enable multiple so (like !so recordlight recorddark ...)  |
+| 3/18/2023  | Handle situation when there is multiple space in chat... (e.g. !so         recordlight)  |
 
 # Thank you

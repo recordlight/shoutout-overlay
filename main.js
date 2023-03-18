@@ -41,11 +41,13 @@ const mainfunction = async function(){
       console.log(usernames)
 
       usernames.forEach(username => {
-        if(shoutoutQueue.length === 0){
-          getUsernameInfo(username);
-          shoutoutQueue.push(username);
-        } else {
-          shoutoutQueue.push(username);
+        if(username !== ""){
+          if(shoutoutQueue.length === 0){
+            getUsernameInfo(username);
+            shoutoutQueue.push(username);
+          } else {
+            shoutoutQueue.push(username);
+          }
         }
       });
     }
