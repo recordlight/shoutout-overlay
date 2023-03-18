@@ -29,24 +29,33 @@ const mainfunction = async function(){
 
 
   client.on('message', (channel, tags, message, self) => {
-    console.log(channel);
     console.log(tags);
-    console.log(mainChannel === channel);
-    if(message.startsWith("!so ") && ('#'+mainChannel === channel || tags.mod === true )) {
-      let username = extractUsername(message);
-      
-      if(shoutoutQueue.length === 0){
-        getUsernameInfo(username);
-        shoutoutQueue.push(username);
-      } else {
-        shoutoutQueue.push(username);
-      }
+
+    var fulfilCondition = (message.startsWith("!so ") || message.startsWith("!shoutout ") || message.startsWith("!mso ")) && 
+      (mainChannel === tags.username || tags.mod === true );
+
+    if(fulfilCondition) 
+    {
+      let usernames = extractUsername(message);
+
+      console.log(usernames)
+
+      usernames.forEach(username => {
+        if(shoutoutQueue.length === 0){
+          getUsernameInfo(username);
+          shoutoutQueue.push(username);
+        } else {
+          shoutoutQueue.push(username);
+        }
+      });
     }
 
   });
 
   function extractUsername(message) {
-    return message.slice(4);
+    var messageComponent = message.split(" ");
+    messageComponent.shift();
+    return messageComponent;
   }
   
   function resetAnimation() {
