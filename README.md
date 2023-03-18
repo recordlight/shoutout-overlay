@@ -11,14 +11,24 @@ Youtube video
 [![Click to redirect to youtube](https://img.youtube.com/vi/YIm7S8_mzm4/0.jpg)](https://www.youtube.com/watch?v=YIm7S8_mzm4)
 
 # How to use
-How to use:
+## Setup in OBS
 Add browser source with URL: 
 https://recordlight.github.io/shoutout-overlay/?channel=[Your channel name]
 
-e.g. https://recordlight.github.io/shoutout-overlay/?channel=recordlight
+For example https://recordlight.github.io/shoutout-overlay/?channel=recordlight
 
 <img src="./documentation/image/instruction.jpg" width="400">
 
+## Chat
+Typed in !so/!shoutout/!mso in your channel chat to trigger the widget.
+```
+!so recordlight
+```
+
+You can also typed in multiple names at the same line. It will queue in the widget. Do take note that this only trigger the widgets and not your streamelements.
+```
+!so recordlight recorddark recordbot
+```
 
 
 
@@ -48,7 +58,7 @@ Changing text color
 <img src="./documentation/image/customization.png" width="400">
 
 # Additional note
-I would appreciate if you could credit me as recordlight (or twitch.tv/recordlight or twitter.com/recordlight_) when using the widget.
+I would appreciate if you could put recordlight as credit (or twitch.tv/recordlight or twitter.com/recordlight_) when using the widget.
 
 <a href="https://twitch.tv/recordlight" alt="my twitch channel"><img src="./documentation/image/visittwitch.png" width="250"></a>
 
@@ -56,5 +66,6 @@ I would appreciate if you could credit me as recordlight (or twitch.tv/recordlig
 | Date  | Change |
 | ------------- | ------------- |
 | 3/17/2023  | Code optimization, improved clip picking algorithm, enable easier change of text style  |
+| 3/18/2023  | Bug fix just to enable only mods and broadcaster to trigger the so. Also added the !shoutout command. Also enable multiple so (like !so recordlight recorddark ...)  |
 
 # Thank you
